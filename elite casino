@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Casino - Tragamonedas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, #2c3e50, #000);
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: gold;
+      text-shadow: 2px 2px 5px black;
+    }
+    #slot {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .reel {
+      width: 100px;
+      height: 100px;
+      background: black;
+      border: 3px solid gold;
+      margin: 0 10px;
+      font-size: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      box-shadow: 0 0 15px gold;
+    }
+    #spin {
+      padding: 10px 20px;
+      font-size: 18px;
+      background: gold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #spin:hover {
+      background: orange;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎰 Mini Casino Online 🎰</h1>
+  <p>Fichas: <span id="credits">100</span></p>
+  <div id="slot">
+    <div class="reel" id="r1">🍒</div>
+    <div class="reel" id="r2">🍋</div>
+    <div class="reel" id="r3">🍊</div>
+  </div>
+  <button id="spin">Girar</button>
+  <p id="result"></p>
+
+  <script>
+    let credits = 100;
+    const reels = ["🍒","🍋","🍊","🍇","⭐","💎"];
+    const creditsSpan = document.getElementById("credits");
+    const result = document.getElementById("result");
+
+    document.getElementById("spin").addEventListener("click", () => {
+      if (credits < 10) {
+        result.textContent = "No tienes suficientes fichas 😢";
+        return;
+      }
+      credits -= 10;
+
+      let r1 = reels[Math.floor(Math.random() * reels.length)];
+      let r2 = reels[Math.floor(Math.random() * reels.length)];
+      let r3 = reels[Math.floor(Math.random() * reels.length)];
+
+      document.getElementById("r1").textContent = r1;
+      document.getElementById("r2").textContent = r2;
+      document.getElementById("r3").textContent = r3;
+
+      if (r1 === r2 && r2 === r3) {
+        credits += 50;
+        result.textContent = "🎉 ¡Ganaste 50 fichas! 🎉";
+      } else {
+        result.textContent = "Sigue intentando...";
+      }
+
+      creditsSpan.textContent = credits;
+    });
+  </script>
+</body>
+</html>
+ 
